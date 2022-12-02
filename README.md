@@ -14,6 +14,8 @@ Timer pops up every 10 minutes
 
 Save data as a .csv file
 
+Message of the day
+
 runs in background
 
 Possible later implementation
