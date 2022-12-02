@@ -4,17 +4,17 @@ This app will track user activity in different projects.
 
 To do
 
--Monitor activity
+Make an app with a UI
 
---what website used
+Hotkeys
 
---what app being used
+Buttons
 
--start timer when app or website opened
+Timer pops up every 10 minutes
 
--save data to a json file
+Save data as a .csv file
 
--runs in background
+runs in background
 
 Possible later implementation
 
