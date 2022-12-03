@@ -4,10 +4,6 @@ import sys
 
 sg.theme('DarkBlue')
 
-def logic():
-    while True:
-        main_app()
-
 def main_app():
     #move this function to a different .py file. Have the .app be only for rendering app windows.
     file = ''
@@ -198,6 +194,3 @@ def export_window():
             sys.exit("Data successfully exported now display a cute popup message")
 
     
-    
-if __name__ == '__main__':
-    logic()
