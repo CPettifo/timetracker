@@ -4,37 +4,6 @@ import sys
 
 sg.theme('DarkBlue')
 
-def main_app():
-    #move this function to a different .py file. Have the .app be only for rendering app windows.
-    file = ''
-    while True:
-        # home_window returns 'change' to change the save directory
-        # 'modify' to change settings
-        # 'tracking' to start tracking
-        # 'log' to view the log
-        output = home_window()
-        if output == 'change':
-            file = file_path_window()
-            break
-        elif output == 'modify':
-            activity1, activity2, activity3 = settings_window("One", "Two", "Three")
-            break
-        elif output == 'log':
-            log_window()
-            break
-        elif output == 'export':
-            export_window()
-            break
-        elif output == 'tracking':
-            tracking_window()
-            break
-
-    #if file == '':
-    #    file = file_path_window()
-
-    print(file)
-    return True
-
 def home_window():
     layout = [  #[sg.Text("This is the main app")],
                 [sg.Button('Change save directory')],
@@ -193,4 +162,3 @@ def export_window():
         elif event == "EXPORT":
             sys.exit("Data successfully exported now display a cute popup message")
 
-    
