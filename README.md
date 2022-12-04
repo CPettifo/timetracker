@@ -14,12 +14,12 @@ Timer pops up every 10 minutes
 
 Save data as a .csv file
 
-Message of the day
+Message or quote of the day, stored in a SQL database
 
 runs in background
 
-Possible later implementation
+Possible later ideas
 
--Allocate time to different projects
+-Allocate time to different projects/ manually edit when exporting
 
 -Differentiate between websites accessed
