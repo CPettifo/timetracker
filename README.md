@@ -1,10 +1,10 @@
-# timetracker
+## timetracker
 
 This app will track user activity in different projects. 
 
 To do
 
-Make an app with a UI
+Make an app with a UI - Barebones and exists
 
 Hotkeys
 
