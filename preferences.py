@@ -25,11 +25,16 @@ def write_json(name1, hotkey1, name2, hotkey2, name3, hotkey3):
         json.dump(activity, file_object)
 
 #read from file
-def read_json(filename):
-    with open(filename, 'r') as file_object:
+def read_json(n):
+    with open('activities.json', 'r') as file_object:
         data = json.load(file_object)
-    print(data)
-    return 0
+    if n == 1:
+        return (data["name1"], data["hotkey1"])
+    elif n == 2:
+        return (data["name2"], data["hotkey2"])
+    elif n == 3:
+        return (data["name3"], data["hotkey3"])
+
 
 while __name__ == '__main__':
     check_file()

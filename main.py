@@ -42,6 +42,10 @@ def main():
     global act2
     global act3
     act1.add(200)
+    act1.name, act1.hotkey = preferences.read_json(1)
+    act2.name, act2.hotkey = preferences.read_json(2)
+    act3.name, act3.hotkey = preferences.read_json(3)
+
 
     while True:
         print(act1)
