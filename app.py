@@ -35,9 +35,10 @@ def home_window():
             window.close()
             return 'export'
 
-def file_path_window():
+def file_path_window(file):
 
     layout = [  [sg.Text("Input the folder you wish to save your data into")],
+                [sg.Text(f"Currently configured to save into:  {file}")],
                 [sg.InputText(), sg.FileBrowse()],
                 [sg.Button('OK'), sg.Button('Cancel')]]
                 
@@ -49,11 +50,8 @@ def file_path_window():
             window.close()
             break
         elif event == 'OK':
-            if values == '':
-                print('Must have input')
-                break
             window.close()
-            return str(values)
+            return str(values[0])
 
 def settings_window(Activity1, Activity2, Activity3):
     #takes as input the activity names and hotkey and returns the name and hotkey if modified.
@@ -122,15 +120,15 @@ def tracking_window():
 
 
 
-def log_window():
+def log_window(act1, hrs1, mins1, act2, hrs2, mins2, act3, hrs3, mins3):
     #displays the logs for the day as text. Takes activity name and time from the activity class as inputs and displays them
     #has a button that takes the user to the export window
 
 
-    layout = [  [sg.Text(f"You have spent X hours and X minutes on ACTIVITY 1 today")],
-                [sg.Text(f"You have spent X hours and X minutes on ACTIVITY 2 today")],
-                [sg.Text(f"You have spent X hours and X minutes on ACTIVITY 3 today")],
-                [sg.Button('OK'), sg.Button("I'm finished for the day!")]]
+    layout = [  [sg.Text(f"You have spent {hrs1} hours and {mins1} minutes on {act1} today")],
+                [sg.Text(f"You have spent {hrs2} hours and {mins2} minutes on {act2} today")],
+                [sg.Text(f"You have spent {hrs3} hours and {mins3} minutes on {act3} today")],
+                [sg.Button('OK')]]
                 
     window = sg.Window("Today's Timetracking", layout)
 
@@ -139,16 +137,12 @@ def log_window():
         if event == sg.WIN_CLOSED or event == 'OK':
             window.close()
             break
-        elif event == "I'm finished for the day!":
-            window.close()
-            export_window()
-            break
         
 
-def export_window():
+def export_window(file):
     #takes the save directory as input, displays that in a window and then allows the user to export their activity times
     #will add to the specified excell spreadsheet and append the day's logs to it.
-    layout = [  [sg.Text(f"You have specified FILEPATH as your export path")],
+    layout = [  [sg.Text(f"You have specified {file} as your export path")],
                 [sg.Text(f"Pressing the button below will close the program and add a new row to the specified excel spreadsheet.")],
                 [sg.Text(f"Make sure you are finished for the day."), sg.Button("EXPORT"), sg.Button("Cancel")]]
         
