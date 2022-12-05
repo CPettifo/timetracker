@@ -1,4 +1,6 @@
 import app
+import timing
+import sys
 
 #This file will manage the main logic, track the Activity classes and call functions from the timing and app files
 
@@ -29,7 +31,9 @@ def main_app():
             app.export_window()
             break
         elif output == 'tracking':
-            app.tracking_window()
+            to_track = app.tracking_window()
+            minutes = timing.record_time('ctrl + shift + F1')
+            sys.exit(f"{minutes} minutes recorded")
             break
 
 
