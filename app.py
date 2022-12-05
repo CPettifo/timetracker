@@ -72,7 +72,7 @@ def settings_window(Activity1, Activity2, Activity3):
             return(Activity1, Activity2, Activity3)
         elif event == 'Change Names':
             window.close()
-            return values
+            return (values[0], values[1], values[2])
         elif event == 'Change Hotkey 1':
             window.close()
             hotkey_window(Activity1)
@@ -88,7 +88,6 @@ def settings_window(Activity1, Activity2, Activity3):
             hotkey_window(Activity3)
             #NEED TO OPEN HOTKEY SETTING WINDOW HERE
             break
-    return (Activity1, Activity2, Activity3)
 
 
 def hotkey_window(activity):
