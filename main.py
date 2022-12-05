@@ -1,44 +1,58 @@
-import app
-import timing
+import app, timing, preferences
 import sys
+import json
 
 #This file will manage the main logic, track the Activity classes and call functions from the timing and app files
 class Activity:
-    def __init__(self, name, hotkey, hours, minutes):
+    def __init__(self, name, hotkey, hours = 0, minutes = 0):
         self.name = name
         self.hotkey = hotkey
         self.hours = hours
         self.minutes = minutes
 
     def __str__(self):
-        return f'"{self.name}" has "{self.hotkey}" as the hotkey, and you have recorded {self.minutes} minutes today'
+        return f'"{self.name}" has "{self.hotkey}" as the hotkey, and you have recorded {self.hours} hours and {self.minutes} minutes today'
 
     #allows you the main function to add minutes to the activity
-    def __add__(self, n):
-        self.time += n
+    def add(self, n):
+        hrs = int(n / 60)
+        mins = (n - (hrs * 60))
+        self.minutes += mins
+        self.hours += hrs
     #@classmethod
     #def get(cls):
         #will call on function to make a new activity
 
+act1 = Activity("Coding", "ctrl + shift + F1")
+act2 = Activity("Writing", "ctrl + shift + F2")
+act3 = Activity("French", "ctrl + shift + F2")
+
 def main():
     #check the user-settings.json file exists
-
+    if preferences.check_file() == False:
+        preferences.write_json('Activity 1', 'Hotkey 1', 'Activity 2', 'Hotkey 2', 'Activity 3', 'Hotkey 3')
     #if it does not exist, render an app window to take initial settings
+    
 
 
     #testing initialisation of classes
-    coding = Activity("Coding", "ctrl + shift + F1", 3, 100)
-    writing = Activity("Writing", "ctrl + shift + F2", 1, 20)
-    french = Activity("French", "ctrl + shift + F3", 1, 20)
-    print(coding)
-    print(writing)
-    print(french)
+
+    global act1
+    global act2
+    global act3
+    act1.add(200)
+    print(act1)
+    print(act2)
+    print(act3)
     while True:
         main_app()
 
 def main_app():
     #move this function to a different .py file. Have the .app be only for rendering app windows.
     file = ''
+    global act1
+    global act2
+    global act3
     while True:
         # home_window returns 'change' to change the save directory
         # 'modify' to change settings
@@ -49,7 +63,8 @@ def main_app():
             file = app.file_path_window()
             break
         elif output == 'modify':
-            activity1, activity2, activity3 = app.settings_window("One", "Two", "Three")
+            act1.name, act2.name, act3.name = app.settings_window(act1.name, act2.name, act3.name)
+            print(act1, act2, act3)
             break
         elif output == 'log':
             app.log_window()
