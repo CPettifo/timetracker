@@ -3,9 +3,20 @@ import timing
 import sys
 
 #This file will manage the main logic, track the Activity classes and call functions from the timing and app files
+class Activity:
+    def __init__(self, name, hotkey, time):
+        self.name = name
+        self.hotkey = hotkey
+        self.time = time
 
+    def __str__(self):
+        return f'"{self.name}" has "{self.hotkey}" as the hotkey, and you have recorded {self.time} today'
 
 def main():
+    #check the user-settings.json file exists
+
+    #if it does not exist, render an app window to take initial settings
+
     while True:
         main_app()
 
