@@ -1,18 +1,19 @@
 ## timetracker
 
-This app will track user activity in different projects. 
+This app will track user activity in different projects, save user preferences as a .json file, and export the day's times as a new line in an excel spreadsheet, with the date and titles of the activities
+Can store time temporarily in a .json file in case the user accidentally closes the program during the day, this file will be deleted when exporting to excel
 
-To do
+STATUS
 
-Make an app with a UI - Barebones and exists
+Make an app with a UI - Functional, need to add a small window to display when user is recording time
 
-Hotkeys
+Hotkeys - Hotkeys can stop the time recording, need to add the ability to change hotkeys
 
 Buttons
 
 Timer pops up every 10 minutes
 
-Save data as a .csv file
+Save data as a .csv file or excel file
 
 Message or quote of the day, stored in a SQL database
 
