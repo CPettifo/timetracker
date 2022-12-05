@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-import time
+from time import sleep
 import sys
 
 sg.theme('DarkBlue')
@@ -93,12 +93,12 @@ def hotkey_window(activity):
     print('Not implemented yet')
 
 
-def tracking_window():
+def tracking_window(act1, act2, act3):
     #displays the defined activity and what the configured hotkey is. And a button to start tracking.
     #while this window is open the program searches for hotkey input.
-    layout = [  [sg.Text(f"Activity 1"), sg.Button("Record Activity 1")],
-                [sg.Text(f"Activity 2"), sg.Button("Record Activity 2")],
-                [sg.Text(f"Activity 3"), sg.Button("Record Activity 3")],
+    layout = [  [sg.Text(f"{act1}"), sg.Button("Record Activity 1")],
+                [sg.Text(f"{act2}"), sg.Button("Record Activity 2")],
+                [sg.Text(f"{act3}"), sg.Button("Record Activity 3")],
                 [sg.Button("Cancel")]]
 
     window = sg.Window("Tracking Window", layout)
@@ -110,12 +110,19 @@ def tracking_window():
             break
         elif event == "Record Activity 1":
             print("Now recording activity 1")
+            sleep(1)
             window.close
-            return ('Activity 1')
+            return ('act1')
         elif event == "Record Activity 2":
             print("Now recording activity 2")
+            sleep(1)
+            window.close
+            return ('act2')
         elif event == "Record Activity 3":
             print("Now recording activity 3")
+            sleep(1)
+            window.close
+            return ('act3')
 
 
 

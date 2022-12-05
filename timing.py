@@ -7,20 +7,16 @@ import sys
 #keyboard.add_hotkey('ctrl + shift + g', print, args =(False))
 
 def quit():
-    global minutes
-    global start
     global exit_value
-    elapsed = time.time() - start
     exit_value = 1
 
 exit_value = 0
-start = 0
-minutes = 0
 
 def record_time(hotkey):
-    start = time.time()
-    global minutes
     global exit_value
+    exit_value = 0
+    start = time.time()
+    minutes = 0
     tensecs = time.time()
     keyboard.add_hotkey(hotkey, quit)
     while exit_value == 0:
