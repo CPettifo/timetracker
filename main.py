@@ -26,6 +26,7 @@ class Activity:
 act1 = Activity("Coding", "ctrl + shift + F1")
 act2 = Activity("Writing", "ctrl + shift + F2")
 act3 = Activity("French", "ctrl + shift + F2")
+file = ''
 
 def main():
     #check the user-settings.json file exists
@@ -45,14 +46,13 @@ def main():
     print(act2)
     print(act3)
     while True:
-        main_app()
+        logic()
 
-def main_app():
-    #move this function to a different .py file. Have the .app be only for rendering app windows.
-    file = ''
+def logic():
     global act1
     global act2
     global act3
+    global file
     while True:
         # home_window returns 'change' to change the save directory
         # 'modify' to change settings
@@ -60,17 +60,16 @@ def main_app():
         # 'log' to view the log
         output = app.home_window()
         if output == 'change':
-            file = app.file_path_window()
+            file = app.file_path_window(file)
             break
         elif output == 'modify':
             act1.name, act2.name, act3.name = app.settings_window(act1.name, act2.name, act3.name)
-            print(act1, act2, act3)
             break
         elif output == 'log':
-            app.log_window()
+            app.log_window(act1.name, act1.hours, act1.minutes, act2.name, act2.hours, act2.minutes, act3.name, act3.hours, act3.minutes)
             break
         elif output == 'export':
-            app.export_window()
+            app.export_window(file)
             break
         elif output == 'tracking':
             to_track = app.tracking_window()
