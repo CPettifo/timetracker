@@ -46,6 +46,7 @@ def main():
     print(act2)
     print(act3)
     while True:
+        #call on the logic function
         logic()
 
 def logic():
@@ -64,6 +65,8 @@ def logic():
             break
         elif output == 'modify':
             act1.name, act2.name, act3.name = app.settings_window(act1.name, act2.name, act3.name)
+            #update the .json file
+            preferences.write_json(act1.name, act1.hotkey, act2.name, act2.hotkey, act3.name, act3.hotkey)
             break
         elif output == 'log':
             app.log_window(act1.name, act1.hours, act1.minutes, act2.name, act2.hours, act2.minutes, act3.name, act3.hours, act3.minutes)
