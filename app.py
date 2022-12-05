@@ -102,29 +102,24 @@ def tracking_window(act1, act2, act3):
                 [sg.Button("Cancel")]]
 
     window = sg.Window("Tracking Window", layout)
-
+    act = 'IloveMarie'
     while True:
         event, values = window.read()
         if event == sg.WIN_CLOSED or event == "Cancel":
             window.close()
             break
         elif event == "Record Activity 1":
-            print("Now recording activity 1")
-            sleep(1)
-            window.close
-            return ('act1')
+            act = 'act1'
+            break
         elif event == "Record Activity 2":
-            print("Now recording activity 2")
-            sleep(1)
-            window.close
-            return ('act2')
+            act = 'act2'
+            break
         elif event == "Record Activity 3":
-            print("Now recording activity 3")
-            sleep(1)
-            window.close
-            return ('act3')
-
-
+            act = 'act3'
+            break
+    window.close()
+    if act != 'IloveMarie':
+        return act
 
 
 def log_window(act1, hrs1, mins1, act2, hrs2, mins2, act3, hrs3, mins3):
