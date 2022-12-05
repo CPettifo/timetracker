@@ -159,7 +159,6 @@ def export_window(file):
         event, values = window.read()
         if event == sg.WIN_CLOSED or event == "Cancel":
             window.close()
-            log_window()
             break
         elif event == "EXPORT":
             sys.exit("Data successfully exported now display a cute popup message")
