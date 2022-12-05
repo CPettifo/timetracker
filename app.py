@@ -113,6 +113,8 @@ def tracking_window():
             break
         elif event == "Record Activity 1":
             print("Now recording activity 1")
+            window.close
+            return ('Activity 1')
         elif event == "Record Activity 2":
             print("Now recording activity 2")
         elif event == "Record Activity 3":
