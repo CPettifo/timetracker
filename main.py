@@ -83,13 +83,13 @@ def logic():
         elif output == 'tracking':
             act = app.tracking_window(act1.name, act2.name, act3.name)
             if act == 'act1':
-                minutes = timing.record_time(act1.hotkey)
+                minutes = app.record_window(act1.name, act1.hotkey)
                 act1.add(minutes)
             elif act == 'act2':
-                minutes = timing.record_time(act2.hotkey)
+                minutes = app.record_window(act2.name, act2.hotkey)
                 act2.add(minutes)
             elif act == 'act3':
-                minutes = timing.record_time(act3.hotkey)
+                minutes = app.record_window(act3.name, act3.hotkey)
                 act3.add(minutes)
             break
 
