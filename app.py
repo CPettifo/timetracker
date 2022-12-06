@@ -194,9 +194,7 @@ def record_window(act, key):
 
     global minutes
     global hotkey_quit_value
-    thingy = 0
-    while thingy == 0:
-        thingy += 1
+    while True:
         event, values = window.read()
         if event == "Confirm":
             print(f"Timer begun for {act}")
