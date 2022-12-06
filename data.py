@@ -1,6 +1,6 @@
 # responsible for saving the day's temporary data if user closes the main window
 # will also interact with the .sql database, and write the excel file on export
-import json
+import json, os
 from os.path import exists
 
 def check_file(file):
@@ -26,3 +26,6 @@ def times_json_read():
     with open("temp.json", "r") as file_object:
         times = json.load(file_object)
         return (times["hrs1"], times["mins1"], times["hrs2"], times["mins2"], times["hrs3"], times["mins3"])
+
+def times_json_kill():
+    os.remove("temp.json")

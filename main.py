@@ -79,6 +79,7 @@ def logic():
         elif output == 'export':
             act = app.export_window(file)
             if act == 'export':
+                data.times_json_kill()
                 sys.exit ("Exported data to excel file and deleted temp.json")
             break
         elif output == 'tracking':
