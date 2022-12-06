@@ -77,7 +77,9 @@ def logic():
             app.log_window(act1.name, act1.hours, act1.minutes, act2.name, act2.hours, act2.minutes, act3.name, act3.hours, act3.minutes)
             break
         elif output == 'export':
-            app.export_window(file)
+            act = app.export_window(file)
+            if act == 'export':
+                sys.exit ("Exported data to excel file and deleted temp.json")
             break
         elif output == 'tracking':
             act = app.tracking_window(act1.name, act2.name, act3.name)
@@ -91,6 +93,10 @@ def logic():
                 minutes = app.record_window(act3.name, act3.hotkey)
                 act3.add(minutes)
             break
+        elif output == 'close':
+            data.times_json_write(act1.hrs, act1.mins, act2.hrs, act2.mins, act3.hrs, act3.mins)
+            # render a cute popup
+            sys.exit("Exited with status 0")
 
 
 if __name__ == '__main__':
