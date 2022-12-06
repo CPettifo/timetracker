@@ -27,13 +27,13 @@ class Activity:
 
 act1 = Activity("Coding", "ctrl + shift + F1")
 act2 = Activity("Writing", "ctrl + shift + F2")
-act3 = Activity("French", "ctrl + shift + F2")
+act3 = Activity("French", "ctrl + shift + F3")
 file = ''
 
 def main():
     #check the user-settings.json file exists
     if preferences.check_file() == False:
-        preferences.write_json('Activity 1', 'Hotkey 1', 'Activity 2', 'Hotkey 2', 'Activity 3', 'Hotkey 3')
+        preferences.write_json('Activity 1', 'ctrl + shift + F1', 'Activity 2', 'ctrl + shift + F2', 'Activity 3', 'ctrl + shift + F3')
     #if it does not exist, render an app window to take initial settings
     
 
