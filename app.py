@@ -147,7 +147,7 @@ def log_window(act1, hrs1, mins1, act2, hrs2, mins2, act3, hrs3, mins3):
 def export_window(file):
     #takes the save directory as input, displays that in a window and then allows the user to export their activity times
     #will add to the specified excell spreadsheet and append the day's logs to it.
-    layout = [  [sg.Text(f"You have specified {file} as your export path")],
+    layout = [  [sg.Text(f'You have specified "{file}" as your export path')],
                 [sg.Text(f"Pressing the button below will close the program and add a new row to the specified excel spreadsheet.")],
                 [sg.Text(f"Make sure you are finished for the day."), sg.Button("EXPORT"), sg.Button("Cancel")]]
         
@@ -194,9 +194,7 @@ def record_window(act, key):
 
     global minutes
     global hotkey_quit_value
-    thingy = 0
-    while thingy == 0:
-        thingy += 1
+    while True:
         event, values = window.read()
         if event == "Confirm":
             print(f"Timer begun for {act}")
