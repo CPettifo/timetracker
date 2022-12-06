@@ -1,14 +1,5 @@
 # This file allows for the changing of names and hotkeys for the different activities
 import json
-from os.path import exists
-
-#check if file exists
-def check_file():
-    filename = 'activities.json'
-    if exists(filename):
-        return True
-    else:
-        return False
 
 
 #write to file
