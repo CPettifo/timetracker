@@ -67,6 +67,9 @@ def logic():
         output = app.home_window()
         if output == 'change':
             file = app.file_path_window(file)
+            print(file)
+            #update the .json filepath folder
+            data.filepath_update(file)
             break
         elif output == 'modify':
             act1.name, act2.name, act3.name = app.settings_window(act1.name, act2.name, act3.name)
@@ -74,12 +77,14 @@ def logic():
             preferences.write_json(act1.name, act1.hotkey, act2.name, act2.hotkey, act3.name, act3.hotkey)
             break
         elif output == 'log':
-            app.log_window(act1.name, act1.hours, act1.minutes, act2.name, act2.hours, act2.minutes, act3.name, act3.hours, act3.minutes)
+            app.log_window(act1.name, act1.hrs, act1.mins, act2.name, act2.hrs, act2.mins, act3.name, act3.hrs, act3.mins)
             break
         elif output == 'export':
+            file = data.filepath_get()
             act = app.export_window(file)
             if act == 'export':
                 data.times_json_kill()
+                data.add_day_SQL(act1.name, act1.hrs, act1.mins, act2.name, act2.hrs, act2.mins, act3.name, act3.hrs, act3.mins)
                 sys.exit ("Exported data to excel file and deleted temp.json")
             break
         elif output == 'tracking':
