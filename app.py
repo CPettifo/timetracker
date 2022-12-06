@@ -1,6 +1,8 @@
 import PySimpleGUI as sg
-from time import sleep
+import time
 import sys
+import keyboard
+import timing
 
 sg.theme('DarkBlue')
 
@@ -158,3 +160,53 @@ def export_window(file):
         elif event == "EXPORT":
             sys.exit("Data successfully exported now display a cute popup message")
 
+hotkey_quit_value = 0
+start = 0
+minutes = 0
+
+def quit_loop():
+    global hotkey_quit_value
+    hotkey_quit_value = 1
+
+def hotkey_wait(key):
+    global hotkey_quit_value
+    global start
+    global minutes
+    start = time.time()
+    hotkey_quit_value = 0
+    minutes = 0
+    keyboard.add_hotkey(key, quit_loop)
+    while hotkey_quit_value == 0:
+        if time.time() - start > 60:
+            minutes += 1
+            print(f"{minutes} minutes elapsed")
+            start = time.time()
+
+def record_window(act, key):
+
+    layout = [ [sg.Text(f"Start recording for {act}? {key} will stop recording")],
+                [sg.Button("Confirm"), sg.Button("Cancel")]]
+
+    window = sg.Window("Counting", layout)
+    window.move(10, 10)
+
+    global minutes
+    global hotkey_quit_value
+    thingy = 0
+    while thingy == 0:
+        thingy += 1
+        event, values = window.read()
+        if event == "Confirm":
+            print(f"Timer begun for {act}")
+            break
+        elif event == "Cancel":
+            window.close()
+            return minutes
+    if minutes == 0:
+        window.close()
+        hotkey_wait(key)
+        sg.popup(f"Recorded {minutes} minutes for {act}")
+
+
+  
+    return minutes
