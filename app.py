@@ -1,39 +1,8 @@
 import PySimpleGUI as sg
-import time
+from time import sleep
 import sys
 
 sg.theme('DarkBlue')
-
-def main_app():
-    #move this function to a different .py file. Have the .app be only for rendering app windows.
-    file = ''
-    while True:
-        # home_window returns 'change' to change the save directory
-        # 'modify' to change settings
-        # 'tracking' to start tracking
-        # 'log' to view the log
-        output = home_window()
-        if output == 'change':
-            file = file_path_window()
-            break
-        elif output == 'modify':
-            activity1, activity2, activity3 = settings_window("One", "Two", "Three")
-            break
-        elif output == 'log':
-            log_window()
-            break
-        elif output == 'export':
-            export_window()
-            break
-        elif output == 'tracking':
-            tracking_window()
-            break
-
-    #if file == '':
-    #    file = file_path_window()
-
-    print(file)
-    return True
 
 def home_window():
     layout = [  #[sg.Text("This is the main app")],
@@ -66,9 +35,10 @@ def home_window():
             window.close()
             return 'export'
 
-def file_path_window():
+def file_path_window(file):
 
     layout = [  [sg.Text("Input the folder you wish to save your data into")],
+                [sg.Text(f"Currently configured to save into:  {file}")],
                 [sg.InputText(), sg.FileBrowse()],
                 [sg.Button('OK'), sg.Button('Cancel')]]
                 
@@ -80,11 +50,8 @@ def file_path_window():
             window.close()
             break
         elif event == 'OK':
-            if values == '':
-                print('Must have input')
-                break
             window.close()
-            return str(values)
+            return str(values[0])
 
 def settings_window(Activity1, Activity2, Activity3):
     #takes as input the activity names and hotkey and returns the name and hotkey if modified.
@@ -103,7 +70,7 @@ def settings_window(Activity1, Activity2, Activity3):
             return(Activity1, Activity2, Activity3)
         elif event == 'Change Names':
             window.close()
-            return values
+            return (values[0], values[1], values[2])
         elif event == 'Change Hotkey 1':
             window.close()
             hotkey_window(Activity1)
@@ -119,7 +86,6 @@ def settings_window(Activity1, Activity2, Activity3):
             hotkey_window(Activity3)
             #NEED TO OPEN HOTKEY SETTING WINDOW HERE
             break
-    return (Activity1, Activity2, Activity3)
 
 
 def hotkey_window(activity):
@@ -127,40 +93,44 @@ def hotkey_window(activity):
     print('Not implemented yet')
 
 
-def tracking_window():
+def tracking_window(act1, act2, act3):
     #displays the defined activity and what the configured hotkey is. And a button to start tracking.
     #while this window is open the program searches for hotkey input.
-    layout = [  [sg.Text(f"Activity 1"), sg.Button("Record Activity 1")],
-                [sg.Text(f"Activity 2"), sg.Button("Record Activity 2")],
-                [sg.Text(f"Activity 3"), sg.Button("Record Activity 3")],
+    layout = [  [sg.Text(f"{act1}"), sg.Button("Record Activity 1")],
+                [sg.Text(f"{act2}"), sg.Button("Record Activity 2")],
+                [sg.Text(f"{act3}"), sg.Button("Record Activity 3")],
                 [sg.Button("Cancel")]]
 
     window = sg.Window("Tracking Window", layout)
-
+    act = 'IloveMarie'
     while True:
         event, values = window.read()
         if event == sg.WIN_CLOSED or event == "Cancel":
             window.close()
             break
         elif event == "Record Activity 1":
-            print("Now recording activity 1")
+            act = 'act1'
+            break
         elif event == "Record Activity 2":
-            print("Now recording activity 2")
+            act = 'act2'
+            break
         elif event == "Record Activity 3":
-            print("Now recording activity 3")
+            act = 'act3'
+            break
+    window.close()
+    if act != 'IloveMarie':
+        return act
 
 
-
-
-def log_window():
+def log_window(act1, hrs1, mins1, act2, hrs2, mins2, act3, hrs3, mins3):
     #displays the logs for the day as text. Takes activity name and time from the activity class as inputs and displays them
     #has a button that takes the user to the export window
 
 
-    layout = [  [sg.Text(f"You have spent X hours and X minutes on ACTIVITY 1 today")],
-                [sg.Text(f"You have spent X hours and X minutes on ACTIVITY 2 today")],
-                [sg.Text(f"You have spent X hours and X minutes on ACTIVITY 3 today")],
-                [sg.Button('OK'), sg.Button("I'm finished for the day!")]]
+    layout = [  [sg.Text(f"You have spent {hrs1} hours and {mins1} minutes on {act1} today")],
+                [sg.Text(f"You have spent {hrs2} hours and {mins2} minutes on {act2} today")],
+                [sg.Text(f"You have spent {hrs3} hours and {mins3} minutes on {act3} today")],
+                [sg.Button('OK')]]
                 
     window = sg.Window("Today's Timetracking", layout)
 
@@ -169,16 +139,12 @@ def log_window():
         if event == sg.WIN_CLOSED or event == 'OK':
             window.close()
             break
-        elif event == "I'm finished for the day!":
-            window.close()
-            export_window()
-            break
         
 
-def export_window():
+def export_window(file):
     #takes the save directory as input, displays that in a window and then allows the user to export their activity times
     #will add to the specified excell spreadsheet and append the day's logs to it.
-    layout = [  [sg.Text(f"You have specified FILEPATH as your export path")],
+    layout = [  [sg.Text(f"You have specified {file} as your export path")],
                 [sg.Text(f"Pressing the button below will close the program and add a new row to the specified excel spreadsheet.")],
                 [sg.Text(f"Make sure you are finished for the day."), sg.Button("EXPORT"), sg.Button("Cancel")]]
         
@@ -188,9 +154,7 @@ def export_window():
         event, values = window.read()
         if event == sg.WIN_CLOSED or event == "Cancel":
             window.close()
-            log_window()
             break
         elif event == "EXPORT":
             sys.exit("Data successfully exported now display a cute popup message")
 
-    
