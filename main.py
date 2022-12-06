@@ -1,24 +1,24 @@
-import app, timing, preferences
+import app, timing, preferences, data
 import sys
 import json
 
 #This file will manage the main logic, track the Activity classes and call functions from the timing and app files
 class Activity:
-    def __init__(self, name, hotkey, hours = 0, minutes = 0):
+    def __init__(self, name, hotkey, hrs = 0, mins = 0):
         self.name = name
         self.hotkey = hotkey
-        self.hours = hours
-        self.minutes = minutes
+        self.hrs = hrs
+        self.mins = mins
 
     def __str__(self):
-        return f'"{self.name}" has "{self.hotkey}" as the hotkey, and you have recorded {self.hours} hours and {self.minutes} minutes today'
+        return f'"{self.name}" has "{self.hotkey}" as the hotkey, and you have recorded {self.hrs} hours and {self.mins} minutes today'
 
     #allows you the main function to add minutes to the activity
     def add(self, n):
-        hrs = int(n / 60)
-        mins = (n - (hrs * 60))
-        self.minutes += mins
-        self.hours += hrs
+        hours = int(n / 60)
+        minutes = (n - (hours * 60))
+        self.mins += minutes
+        self.hrs += hours
     #@classmethod
     #def get(cls):
         #will call on function to make a new activity
@@ -29,23 +29,22 @@ act3 = Activity("French", "ctrl + shift + F2")
 file = ''
 
 def main():
-    #check the user-settings.json file exists
-    if preferences.check_file() == False:
-        preferences.write_json('Activity 1', 'Hotkey 1', 'Activity 2', 'Hotkey 2', 'Activity 3', 'Hotkey 3')
-    #if it does not exist, render an app window to take initial settings
-    
+    # initialize the classes
+    global act1, act2, act3
 
-
-    #testing initialisation of classes
-
-    global act1
-    global act2
-    global act3
+    # check the user-settings.json file exists
+    if data.check_file('activities.json') == False:
+        preferences.write_json('Activity 1', 'ctrl + shift + F1', 'Activity 2', 'ctrl + shift + F2', 'Activity 3', 'ctrl + shift + F3')
+    # if the 'activities.json' file exists, read the data from it and assign it to the classes
     act1.name, act1.hotkey = preferences.read_json(1)
     act2.name, act2.hotkey = preferences.read_json(2)
     act3.name, act3.hotkey = preferences.read_json(3)
-
-
+    # checks if there is a temp.json file and creates one if there is not
+    if data.check_file('temp.json') == False:
+        data.times_json_write(act1.hrs, act1.mins, act2.hrs, act2.mins, act3.hrs, act3.mins)
+    # else read from the 'temp.json' file and assign the values to the classes
+    else:
+        act1.hrs, act1.mins, act2.hrs, act2.mins, act3.hrs, act3.mins = data.times_json_read()
 
     while True:
         print(act1)
