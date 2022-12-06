@@ -20,7 +20,8 @@ def home_window():
     while True:
         event, values = window.read()
         if event == sg.WIN_CLOSED or event == 'Exit':
-            sys.exit('Closed Successfully')
+            window.close()
+            return 'close'
         elif event == 'Change save directory':
             window.close()
             return 'change'
@@ -158,7 +159,8 @@ def export_window(file):
             window.close()
             break
         elif event == "EXPORT":
-            sys.exit("Data successfully exported now display a cute popup message")
+            window.close()
+            return 'export'
 
 hotkey_quit_value = 0
 start = 0
