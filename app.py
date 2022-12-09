@@ -1,7 +1,6 @@
 import PySimpleGUI as sg
-import time
-import sys
-import keyboard
+import time, sys, keyboard
+# this one is mine
 import timing
 
 sg.theme('DarkBlue')
